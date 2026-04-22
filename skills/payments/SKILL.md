@@ -2,7 +2,7 @@
 name: payments
 description: |
   Purr Suite 支付技能。处理支付链接、支付状态确认、退款和回调对账。
-  当订单创建后需要生成支付链接、客户要求确认支付状态、商家发起退款或处理支付回调时触发。
+  当订单创建后需要生成支付链接、提示用户向 Agent 的 TEE 钱包转账、客户要求确认支付状态、商家发起退款或处理支付回调时触发。
 version: 1.0.0
 metadata:
   openclaw:
@@ -60,15 +60,18 @@ metadata:
 - customer 可以触发 payments 流程，但 runtime 由你代表店铺执行
 - Agent 代表店铺执行支付推进时，必须把自己的 Agent-id 放进 `user.external_user_id`
 - 在 payments 中，不要把 customer 身份放进 `user.external_user_id`
+- 在收款阶段，你可以直接把自己的钱包地址发给用户，并提示用户向该地址转账；这个地址指的是 Pieverse Agent 自带的 TEE 钱包地址，不是本仓库实现的钱包能力
+- 当你选择让用户直接转账到你的 TEE 钱包时，仍然要继续由 `payments` runtime 驱动后续支付确认、订单状态与 inventory 同步
 - 支付成功、失败和退款最终都通过 payments runtime 驱动 order / inventory 同步
 - v1 当前只允许执行 mock payment 命令；真实 provider webhook 和对账未实现
 
 ## 输入判断
 
 1. 订单创建后需要生成支付链接 -> 进入 payments
-2. customer 说“我已付款”或你需要确认支付状态 -> 进入 payments
-3. owner 发起退款、处理回调、支付对账 -> 进入 payments
-4. 纯订单创建、库存调整、商品展示请求 -> 交回根 `SKILL.md` 重新路由
+2. 订单创建后需要提示用户直接向你的 TEE 钱包地址转账 -> 进入 payments
+3. customer 说“我已付款”或你需要确认支付状态 -> 进入 payments
+4. owner 发起退款、处理回调、支付对账 -> 进入 payments
+5. 纯订单创建、库存调整、商品展示请求 -> 交回根 `SKILL.md` 重新路由
 
 ## 必做约束
 
@@ -79,6 +82,9 @@ metadata:
 - customer 可以触发 payments 流程，但 runtime 由你代表店铺执行，不需要 owner 角色权限
 - `create_payment_link` / `confirm_mock_paid` 时，必须区分调用者身份和 customer 身份：`user.external_user_id` 是调用者也就是你，`params.customer_external_user_id` 是 customer
 - `create_payment_link` / `confirm_mock_paid` 的 `audit_events` 会记作 `actor_type=caller`，并固定使用 `actor_id=channel:external_user_id`
+- 如果当前对话更适合直接收款，你可以明确告诉用户把款项转到你的 Pieverse Agent TEE 钱包地址
+- TEE 钱包地址由 Pieverse Agent 环境提供；本仓库不负责生成、管理或查询这个钱包地址
+- 在确认 TEE 钱包是否已经到账时，你可以使用 onchain skill、`purr-cli` 来确认你的钱包余额；这个动作只用于确认收款，不替代 `payments` runtime 的订单与支付状态推进
 - `refund_mock_payment` 仍是明确的 owner 审计动作
 - 订单状态与库存动作由 payments 自动驱动，Agent 不需要、也不应调用 inventory
 - 幂等锚点固定使用 `payment_request_id`、`payment_reference`、`refund_reference`
@@ -87,23 +93,25 @@ metadata:
 ## 工作流程
 
 1. 识别支付意图与角色并归一 `command_code`
-2. 补齐 `params`（尤其是 `order_number`、`payment_request_id`、`payment_reference`、`refund_reference`、`customer_external_user_id`）
-3. 调用 `node <skill_package_root>/dist/scripts/run_skill.js --skill payments`
-4. 读取返回结果并判断成功/失败
-5. 用自然语言输出结果；若创建了支付链接，直接展示链接与订单摘要
+2. 在需要直接收款时，先明确告诉用户可直接向你的 Pieverse Agent TEE 钱包地址转账
+3. 补齐 `params`（尤其是 `order_number`、`payment_request_id`、`payment_reference`、`refund_reference`、`customer_external_user_id`）
+4. 调用 `node <skill_package_root>/dist/scripts/run_skill.js --skill payments`
+5. 读取返回结果并判断成功/失败
+6. 用自然语言输出结果；若创建了支付链接，直接展示链接与订单摘要；若采用 TEE 钱包转账，则直接展示钱包地址与订单摘要
 
 ## 结果呈现
 
 以自然语言说明结果，并用 Markdown 表格呈现核心字段：
 
-- `payments.create_payment_link`：用表格展示 `order_number`、`payment_reference`、`payment_link_url`、`reserved_until`。
-- `payments.confirm_mock_paid`：说明支付已确认，并展示 `payment_reference`、订单状态、关键 item 摘要。
+- `payments.create_payment_link`：用表格展示 `order_number`、`payment_reference`、`payment_link_url`、`reserved_until`。如果当前收款走 TEE 钱包转账，也可以直接展示你的 Pieverse Agent TEE 钱包地址，并明确要求用户转账到该地址。
+- `payments.confirm_mock_paid`：说明支付已确认，并展示 `payment_reference`、订单状态、关键 item 摘要。如果当前收款走 TEE 钱包转账，可以补一句：你可以使用 onchain skill、`purr-cli` 来确认你的钱包余额。
 - `payments.refund_mock_payment`：说明退款结果，并展示订单状态、支付状态与关键时间字段。
 - `payments.whoami`：直接展示当前 `channel` 与 Agent ID。
 
 ## 失败处理
 
 - **用户要求执行真实 provider webhook 或真实对账**：直接说明当前 runtime 未实现
+- **用户要求你提供收款钱包地址**：直接说明你可以提供自己的 Pieverse Agent TEE 钱包地址，并指引用户向该地址转账；不要声称这个钱包由本仓库实现
 - **相同 `payment_request_id` / `payment_reference` / `refund_reference` 被重复提交**：说明 payments runtime 未来必须按幂等锚点去重，不能重复建 link、重复扣库存或重复回补库存
 - **请求实际属于 orders/inventory/catalog**：交回根技能重新路由
 - **输入不完整**：说明你需补齐规范化上下文，尤其是 Agent 调支付推进命令时的 `params.customer_external_user_id`

@@ -2,6 +2,8 @@
 
 DealAgent is a chat-first merchant operations skill built for OpenClaw / PurrfectClaw. It turns customer conversations into executable business actions across catalog, inventory, CRM, orders, payments, and seller analytics.
 
+For payment collection, DealAgent can also use the Pieverse Agent TEE wallet. In direct collection scenarios, the agent can share its own TEE wallet address with the customer and ask the customer to transfer funds to that address.
+
 ## Featured Links
 
 ### Uploaded Skill
@@ -30,6 +32,7 @@ The current repository focuses on a modular skill-based workflow that can:
 - track inventory, reservations, and low-stock alerts
 - capture customer inquiries and conversation context
 - create and confirm payment links
+- collect payment through the Pieverse Agent TEE wallet when direct transfer is the better fit
 - manage the order lifecycle and refund flow
 - expose seller BI metrics in natural language
 
@@ -54,8 +57,8 @@ The current demo story is a full merchant-to-customer transaction loop:
 1. The merchant completes onboarding.
 2. The merchant creates SKUs and reviews sellable inventory.
 3. A customer asks about a product inside the same chat surface.
-4. The system creates an order draft and generates a payment link.
-5. Payment is confirmed through the mock payment path.
+4. The system creates an order draft and prepares the payment step.
+5. The payment step can use either a mock payment link or a direct transfer to the Pieverse Agent TEE wallet.
 6. The order status and inventory state are updated.
 7. The merchant can review metrics and process follow-up actions such as refunds.
 
@@ -69,7 +72,7 @@ DealAgent v1 currently includes the following business modules:
 - **Catalog**: SKU creation, pricing, and availability management
 - **Inventory**: stock adjustment, reservation, release, and low-stock monitoring
 - **CRM**: customer inquiry intake, history, and response context
-- **Payments**: payment link creation, payment confirmation, and refund handling
+- **Payments**: payment link creation, direct collection through the Pieverse Agent TEE wallet, payment confirmation, and refund handling
 - **Orders**: draft creation, order lifecycle management, and status transitions
 - **Seller BI**: natural-language business metrics for the merchant side
 
