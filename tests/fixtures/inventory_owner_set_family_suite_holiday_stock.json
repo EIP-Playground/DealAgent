@@ -1,0 +1,19 @@
+{
+  "channel": "telegram",
+  "command_code": "inventory.set_date_stock",
+  "params": {
+    "sku_code": "FAMILY-SUITE-4P",
+    "date_from": "2099-07-01",
+    "date_to": "2099-07-03",
+    "stock_quantity": 2,
+    "reason": "peak_season_hold",
+    "operation_id": "family-suite-holiday-001"
+  },
+  "runtime": {
+    "db_path": "data/dev/purr_suite_dev.sqlite3"
+  },
+  "user": {
+    "external_user_id": "owner-001",
+    "username": "alice"
+  }
+}

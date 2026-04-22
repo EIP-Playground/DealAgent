@@ -1,0 +1,23 @@
+{
+  "channel": "telegram",
+  "command_code": "catalog.add_sku",
+  "params": {
+    "currency": "HKD",
+    "description": "Compact drone bundle with a white carrying case.",
+    "price_minor": 159900,
+    "product_url": "https://example.com/products/dji-dr-4002-wht",
+    "restock_on_refund": false,
+    "sellable_status": "active",
+    "sku_code": "DJI-DR-4002-WHT",
+    "stock_quantity": 5,
+    "title": "DJI Drone White",
+    "media_url": "https://example.com/media/dji-dr-4002-wht.jpg"
+  },
+  "runtime": {
+    "db_path": "data/dev/purr_suite_dev.sqlite3"
+  },
+  "user": {
+    "external_user_id": "owner-001",
+    "username": "alice"
+  }
+}

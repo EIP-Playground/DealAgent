@@ -1,0 +1,19 @@
+{
+  "channel": "telegram",
+  "command_code": "crm.get_response_context",
+  "params": {
+    "customer": {
+      "external_user_id": "customer-001"
+    },
+    "history_limit": 5,
+    "check_in_date": "2099-07-01",
+    "check_out_date": "2099-07-04"
+  },
+  "runtime": {
+    "db_path": "data/dev/purr_suite_dev.sqlite3"
+  },
+  "user": {
+    "external_user_id": "agent-001",
+    "username": "alice"
+  }
+}

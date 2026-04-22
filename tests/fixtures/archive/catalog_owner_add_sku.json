@@ -1,0 +1,23 @@
+{
+  "channel": "telegram",
+  "command_code": "catalog.add_sku",
+  "params": {
+    "currency": "USD",
+    "description": "Classic white t-shirt with a relaxed fit.",
+    "price_minor": 1999,
+    "product_url": "https://example.com/products/nk-ts-1024-wht-l",
+    "restock_on_refund": true,
+    "sellable_status": "active",
+    "sku_code": "NK-TS-1024-WHT-L",
+    "stock_quantity": 12,
+    "title": "Nike White T-Shirt L",
+    "media_url": "https://example.com/media/nk-ts-1024-wht-l.jpg"
+  },
+  "runtime": {
+    "db_path": "data/dev/purr_suite_dev.sqlite3"
+  },
+  "user": {
+    "external_user_id": "owner-001",
+    "username": "alice"
+  }
+}

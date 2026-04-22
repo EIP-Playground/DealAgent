@@ -1,0 +1,14 @@
+{
+  "channel": "telegram",
+  "command_code": "seller_bi.revenue_this_month",
+  "params": {
+    "anchor_date": "2099-07-15"
+  },
+  "runtime": {
+    "db_path": "data/dev/purr_suite_dev.sqlite3"
+  },
+  "user": {
+    "external_user_id": "owner-001",
+    "username": "alice"
+  }
+}

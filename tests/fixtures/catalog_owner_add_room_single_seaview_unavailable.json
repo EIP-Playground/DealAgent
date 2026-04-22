@@ -1,0 +1,24 @@
+{
+  "channel": "telegram",
+  "command_code": "catalog.add_sku",
+  "params": {
+    "currency": "USD",
+    "description": "Compact single room with partial sea view; currently held for maintenance.",
+    "inventory_mode": "date_quantity",
+    "price_minor": 20900,
+    "product_url": "https://example.com/rooms/single-seaview",
+    "restock_on_refund": true,
+    "sellable_status": "unavailable",
+    "sku_code": "SINGLE-SEAVIEW",
+    "stock_quantity": 1,
+    "title": "Single Seaview",
+    "media_url": "https://example.com/media/single-seaview.jpg"
+  },
+  "runtime": {
+    "db_path": "data/dev/purr_suite_dev.sqlite3"
+  },
+  "user": {
+    "external_user_id": "owner-001",
+    "username": "alice"
+  }
+}

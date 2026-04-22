@@ -1,0 +1,15 @@
+{
+  "channel": "telegram",
+  "command_code": "catalog.update_status",
+  "params": {
+    "sellable_status": "unavailable",
+    "sku_code": "XM-MG-3001-GRN-500G"
+  },
+  "runtime": {
+    "db_path": "data/dev/purr_suite_dev.sqlite3"
+  },
+  "user": {
+    "external_user_id": "owner-001",
+    "username": "alice"
+  }
+}

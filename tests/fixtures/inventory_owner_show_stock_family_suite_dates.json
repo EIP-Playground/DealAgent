@@ -1,0 +1,16 @@
+{
+  "channel": "telegram",
+  "command_code": "inventory.show_stock",
+  "params": {
+    "sku_code": "FAMILY-SUITE-4P",
+    "date_from": "2099-07-01",
+    "date_to": "2099-07-03"
+  },
+  "runtime": {
+    "db_path": "data/dev/purr_suite_dev.sqlite3"
+  },
+  "user": {
+    "external_user_id": "owner-001",
+    "username": "alice"
+  }
+}

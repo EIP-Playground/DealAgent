@@ -1,0 +1,24 @@
+{
+  "channel": "telegram",
+  "command_code": "catalog.add_sku",
+  "params": {
+    "currency": "USD",
+    "description": "Large king room with a private balcony and direct sea view.",
+    "inventory_mode": "date_quantity",
+    "price_minor": 28900,
+    "product_url": "https://example.com/rooms/deluxe-seaview-king",
+    "restock_on_refund": true,
+    "sellable_status": "active",
+    "sku_code": "DELUXE-SEAVIEW-KING",
+    "stock_quantity": 6,
+    "title": "Deluxe Seaview King",
+    "media_url": "https://example.com/media/deluxe-seaview-king.jpg"
+  },
+  "runtime": {
+    "db_path": "data/dev/purr_suite_dev.sqlite3"
+  },
+  "user": {
+    "external_user_id": "owner-001",
+    "username": "alice"
+  }
+}

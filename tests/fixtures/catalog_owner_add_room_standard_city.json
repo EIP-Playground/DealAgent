@@ -1,0 +1,24 @@
+{
+  "channel": "telegram",
+  "command_code": "catalog.add_sku",
+  "params": {
+    "currency": "USD",
+    "description": "Comfortable queen room with a city-facing window.",
+    "inventory_mode": "date_quantity",
+    "price_minor": 18900,
+    "product_url": "https://example.com/rooms/standard-city-queen",
+    "restock_on_refund": true,
+    "sellable_status": "active",
+    "sku_code": "STANDARD-CITY-QUEEN",
+    "stock_quantity": 8,
+    "title": "Standard City Queen",
+    "media_url": "https://example.com/media/standard-city-queen.jpg"
+  },
+  "runtime": {
+    "db_path": "data/dev/purr_suite_dev.sqlite3"
+  },
+  "user": {
+    "external_user_id": "owner-001",
+    "username": "alice"
+  }
+}

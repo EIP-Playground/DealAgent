@@ -1,0 +1,17 @@
+{
+  "channel": "telegram",
+  "command_code": "inventory.adjust_stock",
+  "params": {
+    "sku_code": "MINIBAR-SNACK-BOX",
+    "delta": -22,
+    "reason": "late_night_sales",
+    "operation_id": "minibar-low-001"
+  },
+  "runtime": {
+    "db_path": "data/dev/purr_suite_dev.sqlite3"
+  },
+  "user": {
+    "external_user_id": "owner-001",
+    "username": "alice"
+  }
+}

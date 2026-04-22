@@ -1,0 +1,24 @@
+{
+  "channel": "telegram",
+  "command_code": "catalog.add_sku",
+  "params": {
+    "currency": "USD",
+    "description": "Two-room family suite for up to four guests with lounge area.",
+    "inventory_mode": "date_quantity",
+    "price_minor": 35900,
+    "product_url": "https://example.com/rooms/family-suite-4p",
+    "restock_on_refund": true,
+    "sellable_status": "active",
+    "sku_code": "FAMILY-SUITE-4P",
+    "stock_quantity": 3,
+    "title": "Family Suite 4P",
+    "media_url": "https://example.com/media/family-suite-4p.jpg"
+  },
+  "runtime": {
+    "db_path": "data/dev/purr_suite_dev.sqlite3"
+  },
+  "user": {
+    "external_user_id": "owner-001",
+    "username": "alice"
+  }
+}

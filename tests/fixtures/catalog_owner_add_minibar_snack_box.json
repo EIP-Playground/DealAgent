@@ -1,0 +1,24 @@
+{
+  "channel": "telegram",
+  "command_code": "catalog.add_sku",
+  "params": {
+    "currency": "USD",
+    "description": "Grab-and-go minibar snack box kept at the front desk for late arrivals.",
+    "inventory_mode": "quantity",
+    "price_minor": 1800,
+    "product_url": "https://example.com/addons/minibar-snack-box",
+    "restock_on_refund": false,
+    "sellable_status": "active",
+    "sku_code": "MINIBAR-SNACK-BOX",
+    "stock_quantity": 24,
+    "title": "Minibar Snack Box",
+    "media_url": "https://example.com/media/minibar-snack-box.jpg"
+  },
+  "runtime": {
+    "db_path": "data/dev/purr_suite_dev.sqlite3"
+  },
+  "user": {
+    "external_user_id": "owner-001",
+    "username": "alice"
+  }
+}

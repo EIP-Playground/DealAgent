@@ -1,0 +1,15 @@
+{
+  "channel": "telegram",
+  "command_code": "orders.cancel_order",
+  "params": {
+    "order_number": "PO-1001",
+    "reason": "manual_cancel"
+  },
+  "runtime": {
+    "db_path": "data/dev/purr_suite_dev.sqlite3"
+  },
+  "user": {
+    "external_user_id": "owner-001",
+    "username": "alice"
+  }
+}

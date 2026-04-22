@@ -1,0 +1,11 @@
+{
+  "channel": "telegram",
+  "command_code": "catalog.show_catalog",
+  "runtime": {
+    "db_path": "data/dev/purr_suite_dev.sqlite3"
+  },
+  "user": {
+    "external_user_id": "customer-001",
+    "username": "carol"
+  }
+}

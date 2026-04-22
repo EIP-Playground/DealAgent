@@ -1,0 +1,14 @@
+{
+  "channel": "telegram",
+  "command_code": "catalog.archive_sku",
+  "params": {
+    "sku_code": "DELUXE-SEAVIEW-KING"
+  },
+  "runtime": {
+    "db_path": "data/dev/purr_suite_dev.sqlite3"
+  },
+  "user": {
+    "external_user_id": "owner-001",
+    "username": "alice"
+  }
+}

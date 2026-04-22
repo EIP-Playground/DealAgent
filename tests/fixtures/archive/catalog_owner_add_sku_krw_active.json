@@ -1,0 +1,23 @@
+{
+  "channel": "telegram",
+  "command_code": "catalog.add_sku",
+  "params": {
+    "currency": "KRW",
+    "description": "55-inch smart TV in matte black.",
+    "price_minor": 1500000,
+    "product_url": "https://example.com/products/lg-tv-5500-blk-55",
+    "restock_on_refund": true,
+    "sellable_status": "active",
+    "sku_code": "LG-TV-5500-BLK-55",
+    "stock_quantity": 2,
+    "title": "LG TV Black 55",
+    "media_url": "https://example.com/media/lg-tv-5500-blk-55.jpg"
+  },
+  "runtime": {
+    "db_path": "data/dev/purr_suite_dev.sqlite3"
+  },
+  "user": {
+    "external_user_id": "owner-001",
+    "username": "alice"
+  }
+}
