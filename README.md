@@ -1,123 +1,122 @@
 # DealAgent
 
-DealAgent 是一个 chat-first 的库存与客服解决方案。项目当前以库存管理和客户服务为切入点，围绕商品、询单、下单、支付、订单、退款和基础经营数据，逐步扩展成一套轻量级的商家运营工作台。
+DealAgent is a chat-first merchant operations skill built for OpenClaw / PurrfectClaw. It turns customer conversations into executable business actions across catalog, inventory, CRM, orders, payments, and seller analytics.
 
-它的核心判断是：对小商家来说，聊天本身就应该是业务入口。与其把客服、库存、订单和支付拆在多个工具里，不如让一个具备角色权限和业务状态的智能助手统一承接。
+## Featured Links
 
-## 愿景
+### Uploaded Skill
 
-我们的第一目标，是把 DealAgent 做成 **PurrfectClaw 上的库存 + 客服一体化解决方案**：
+- Skill Store: [DealAgent on Pieverse Skill Store](https://www.pieverse.io/skill-store?skill=59620)
 
-- 对商家，降低库存维护、客户回复、订单跟进和售后处理的切换成本。
-- 对客户，在同一个对话入口里完成咨询、下单、支付和订单查询。
-- 对系统，把客服行为自然沉淀为可执行的业务动作，而不是停留在消息回复层。
+### Videos
 
-在这个基础上，DealAgent 会从单点的 inventory / customer support 工具，进一步拓展为覆盖前台销售与后台运营的 agentic commerce suite。
+- YouTube: [Watch the promo / showcase video](https://youtu.be/wafhzWRuk_s)
+- Bilibili: [Watch the product walkthrough demo](https://www.bilibili.com/video/BV1b9XvBmEEu/?share_source=copy_web&vd_source=c2399b62dab4ff0a9720947d3e3f66e1)
 
-## 项目关系
+### More Resources
 
-这里有三层需要区分清楚：
+- Additional links and references: coming soon
 
-- **PurrfectClaw**：OpenClaw 的启动台，也是面向具体业务方案的产品入口。
-- **OpenClaw**：skills 的宿主，负责承载和编排不同业务 skill。
-- **DealAgent**：运行在这套框架上的一个具体方案，当前聚焦库存、客服、订单和支付闭环。
+---
 
-换句话说，DealAgent 不是孤立产品，而是 PurrfectClaw 启动台上的一个业务场景实现；它背后的能力宿主是 OpenClaw。
+## What DealAgent Does
 
-## v1 定位
+DealAgent is designed for small merchants who already run their business through chat. Instead of splitting customer service, stock management, ordering, and payments across multiple tools, DealAgent treats the conversation itself as the operating surface.
 
-- **平台范围**：框架层未来可以连接多个平台，但 **v1 只做 Telegram**。
-- **主入口**：一个共享的 Telegram Bot，同时服务商家与客户。
-- **核心能力**：SKU 管理、库存管理、客户询单、支付链接、支付确认、订单生命周期、退款处理、Seller BI。
-- **数据层**：按业务独立存储在本地 SQLite 中，便于快速落地与后续演进。
-- **交互方式**：以自然语言命令驱动，不依赖传统后台表单作为唯一操作面。
-- **架构方向**：采用模块化 skill/framework 设计，便于后续按业务场景启停和扩展。
+The current repository focuses on a modular skill-based workflow that can:
 
-## 文档关系
+- onboard a merchant workspace
+- manage catalog items and sellable status
+- track inventory, reservations, and low-stock alerts
+- capture customer inquiries and conversation context
+- create and confirm payment links
+- manage the order lifecycle and refund flow
+- expose seller BI metrics in natural language
 
-本仓库当前有三份基础材料，它们的关系如下：
+## Product Direction
 
-- [产品文档](docs/v1/product-foundation/v1-product-spec.docx)：项目主规范，定义产品边界、核心流程、模块接口、数据模型和测试思路。
-- [Demo 文档](docs/v1/product-foundation/v1-demo-spec.docx)：服务于产品文档，用于对外演示和讲故事，把产品能力收敛成一条清晰可展示的 demo flow。
-- [框架图](PurrSuiteFramework-v1.jpg)：初步确认的项目框架，用来说明平台入口、skills 宿主、业务模块与数据层之间的关系。
+The first target is a lightweight merchant operations workflow running on top of OpenClaw:
 
-## 当前产品轮廓
+- for merchants: reduce the switching cost between customer replies, inventory updates, order follow-up, and after-sales handling
+- for customers: complete inquiry, purchase, payment, and order lookup inside the same conversation flow
+- for the system: convert chat activity into structured, auditable business actions instead of leaving it as untracked messages
 
-结合产品文档和框架图，DealAgent v1 实现的skills包括：
+In that model:
 
-- **Onboarding**：完成渠道接入、数据库初始化、owner pairing 和初始配置。
-- **Catalog**：管理商品信息、价格和可售状态。
-- **Inventory**：管理库存保留、扣减、释放和低库存提醒。
-- **CRM**：承接外部询单、客户画像和对话摘要。
-- **Payments**：生成支付链接、查询支付状态、处理 webhook 与退款。
-- **Orders**：管理从购物意图到订单完成的整个生命周期。
-- **Seller BI**：在同一数据层上提供自然语言经营指标查询。
+- **PurrfectClaw** is the product entry point
+- **OpenClaw** is the skill host and orchestration layer
+- **DealAgent** is the business-facing skill package for commerce operations
 
-这意味着 DealAgent 的解决方案不只是一个“会回复消息的客服机器人”，而是一个运行在 OpenClaw（skills 宿主）上的业务操作层，负责把咨询、成交与履约状态串起来。
+## Demo Flow
 
-## Demo 展示计划
+The current demo story is a full merchant-to-customer transaction loop:
 
-根据 demo 文档，第一版对外展示应聚焦一条完整闭环：
+1. The merchant completes onboarding.
+2. The merchant creates SKUs and reviews sellable inventory.
+3. A customer asks about a product inside the same chat surface.
+4. The system creates an order draft and generates a payment link.
+5. Payment is confirmed through the mock payment path.
+6. The order status and inventory state are updated.
+7. The merchant can review metrics and process follow-up actions such as refunds.
 
-1. 商家通过对话完成初始化。
-2. 商家添加 SKU 并查看可售库存。
-3. 客户在同一个 Bot 中咨询商品并发起购买。
-4. 系统创建订单、生成支付链接并保留库存。
-5. 支付成功后自动确认订单并更新库存。（支付部分暂时mock，客户点击付款确认）
-6. 客户查询订单，商家发起退款，系统返回经营指标。
+This flow is meant to show that DealAgent is not just a reply bot. It is an operational layer that connects inquiry, transaction, fulfillment, and reporting.
 
-这条链路的意义在于证明：DealAgent 把客服入口变成了业务入口，把碎片化消息流变成了可追踪、可执行、可分析的运营流。
+## Skill Modules
 
-## 项目框架
+DealAgent v1 currently includes the following business modules:
 
-![DealAgent Framework](PurrSuiteFramework-v1.jpg)
+- **Onboarding**: workspace setup, owner pairing, and initial configuration
+- **Catalog**: SKU creation, pricing, and availability management
+- **Inventory**: stock adjustment, reservation, release, and low-stock monitoring
+- **CRM**: customer inquiry intake, history, and response context
+- **Payments**: payment link creation, payment confirmation, and refund handling
+- **Orders**: draft creation, order lifecycle management, and status transitions
+- **Seller BI**: natural-language business metrics for the merchant side
 
-从这张图可以看出，当前方案已经有明确的几层关系：
+## Architecture
 
-- **平台接入层**：OpenClaw 理论上可以对接多个平台，当前 v1 先落在 Telegram Bot。
-- **角色层**：商家与客户共用同一个 TG Bot，但通过身份与权限区分能力边界。
-- **能力层（skills）**：以 Onboarding、Catalog、Payments、Orders、Inventory、CRM、Seller-BI 等模块组织业务能力。
-- **数据层**：以 SQLite 作为统一状态来源，承接商品、库存、订单、支付和客户数据。
+DealAgent follows a modular skill/runtime structure:
 
-## 仓库结构
+- **Skill layer**: business modules are organized under `skills/`
+- **Script/runtime layer**: TypeScript runtime and CLI entrypoints live under `scripts/`
+- **Data layer**: SQLite is used as the current source of truth for merchant data
+- **Test layer**: Vitest integration coverage verifies the end-to-end business flow
+
+The current design is intentionally lightweight. It keeps the system easy to demo, easy to evolve, and easy to replace with real merchant integrations later.
+
+## Repository Structure
 
 ```text
-.
+DealAgent/
 ├── Agent.md
 ├── SKILL.md
 ├── TODO.md
 ├── Archive/
 │   └── python/
-├── data/
-│   └── dev/
 ├── docs/
 │   └── v1/
+│       ├── code-review/
 │       ├── database/
+│       ├── demo/
 │       ├── execution-plan/
 │       ├── product-foundation/
 │       └── reference/
+├── release/
 ├── scripts/
 │   ├── db/
-│   │   ├── migrations/
-│   │   └── sqlite.ts
 │   ├── dev/
-│   │   ├── init_sqlite
-│   │   ├── db_inspect
-│   │   ├── load_fixture
-│   │   └── README.md
 │   ├── lib/
-│   │   ├── onboarding.ts
-│   │   └── skill_runner.ts
-│   ├── run_skill
-│   ├── test_skill
-│   └── reports/
+│   ├── run_low_stock_scan.ts
+│   ├── run_skill.ts
+│   ├── sync_crm_from_openclaw.ts
+│   └── test_skill.ts
 ├── skills/
-│   ├── onboarding/
 │   ├── catalog/
+│   ├── crm/
 │   ├── inventory/
+│   ├── onboarding/
 │   ├── orders/
 │   ├── payments/
-│   ├── crm/
 │   └── seller-bi/
 ├── tests/
 │   ├── fixtures/
@@ -126,12 +125,62 @@ DealAgent 是一个 chat-first 的库存与客服解决方案。项目当前以�
 └── PurrSuiteFramework-v1.jpg
 ```
 
-## 下一步计划
+## Framework Overview
 
-- 打造成模块化项目：存储层、agent层（含skills）、channel层
-- 支持多平台（whatsapp、instagram等）
-- 支持skills灵活插拔
-- 支持多种数据库方案
-- 集成pieverse支付系统，支持多个provider
-- 准备简单后端服务（含存储层/服务层API）
-- 考虑套用 UCP
+![DealAgent Framework](PurrSuiteFramework-v1.jpg)
+
+At a high level:
+
+- the platform entry can connect to different channels over time
+- merchant and customer interactions share a conversation-first interface
+- business capabilities are split into reusable skill modules
+- SQLite is the current system of record for product, inventory, order, payment, and customer state
+
+## Documentation
+
+- Product spec: [docs/v1/product-foundation/v1-product-spec.md](docs/v1/product-foundation/v1-product-spec.md)
+- Demo spec: [docs/v1/product-foundation/v1-demo-spec.md](docs/v1/product-foundation/v1-demo-spec.md)
+- SQLite design: [docs/v1/database/sqlite-design.md](docs/v1/database/sqlite-design.md)
+- Development plan: [docs/v1/execution-plan/v1-development-plan.md](docs/v1/execution-plan/v1-development-plan.md)
+- Skill contracts: [docs/v1/execution-plan/v1-skill-contracts.md](docs/v1/execution-plan/v1-skill-contracts.md)
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js `24.14.0`
+- npm
+
+### Install
+
+```bash
+npm ci
+```
+
+### Type Check
+
+```bash
+npm run typecheck
+```
+
+### Build
+
+```bash
+npm run build
+```
+
+### Test
+
+```bash
+npm test
+```
+
+## What To Add Next
+
+When the remaining links are ready, the README can be extended with:
+
+- a landing page or official website link
+- a live demo or bot entry link
+- product documentation links for external readers
+- screenshots or GIFs for the main workflow
+- press kit / pitch deck / judge-facing materials
